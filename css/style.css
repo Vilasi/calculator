@@ -1,0 +1,150 @@
+body, html {
+    margin: auto;
+    font-family: 'Noto Sans', sans-serif;
+    
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: grey;
+    border: solid black 1px;
+    width: 30rem !important;
+    margin: 0 auto;
+    max-height: 100%;
+}
+
+main div#calculator-display {
+    /* margin: 10px 5px; */
+    
+    box-sizing: border-box;
+    width: 90%;
+    text-align: right;
+    font-size: 3.5rem;
+    line-height: 0.6rem;
+    background-color: whitesmoke;
+    border: 1px solid black;
+    margin: 10px auto;
+    padding-left: 5px;
+    padding-right: 5px;
+    
+}
+
+main div.button-grid {
+    margin: 0 auto;
+    width: 95%;
+    padding-bottom: 10px;
+    padding-top: 5px;
+    
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "ac ac del divide"
+    "one two three multiply"
+    "four five six add"
+    "seven eight nine subtract"
+    "period zero equals equals";
+}
+
+
+
+main div.button-grid button.btn {
+    font-size: 2rem;
+}
+
+main div.button-grid button.btn:hover {
+    background-color: #c4c4c4;
+    
+}
+
+main div.button-grid button.btn:focus {
+    outline: 0;
+    box-shadow: none !important;
+}
+
+
+
+#button_AC {
+    grid-area: ac;
+}
+
+#button_DEL {
+    grid-area: del;
+}
+
+#button_DIVIDE {
+    grid-area: divide;
+}
+
+#button_1 {
+    grid-area: one;
+}
+
+#button_2 {
+    grid-area: two;
+}
+
+#button_3 {
+    grid-area: three;
+}
+
+#button_TIMES {
+    grid-area: multiply;
+}
+
+#button_4 {
+    grid-area: four;
+}
+
+#button_5 {
+    grid-area: five;
+}
+
+#button_6 {
+    grid-area: six;
+}
+
+#button_PLUS {
+    grid-area: add;
+    
+}
+
+#button_7 {
+    grid-area: seven;
+    
+}
+
+#button_8 {
+    grid-area: eight;
+}
+
+#button_9 {
+    grid-area: nine;
+}
+
+#button_MINUS {
+    grid-area: subtract;
+}
+
+#button_PERIOD {
+    grid-area: period;
+}
+
+#button_0 {
+    grid-area: zero;
+}
+
+#button_EQUALS {
+    grid-area: equals;
+}
