@@ -148,3 +148,14 @@ main div.button-grid button.btn:focus {
 #button_EQUALS {
     grid-area: equals;
 }
+
+
+.blink_me {
+    animation: blinker 1s linear infinite;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
