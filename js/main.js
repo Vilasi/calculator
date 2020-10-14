@@ -57,14 +57,12 @@ button.forEach((btn) => {
             storedValues = [];
         } else if (currentButton == "=") {
 
-            console.log(numberConcatenator);
-
+            
             joinedNumber = numberConcatenator.join('');
             storedValues.push(Number(joinedNumber));
-
-            console.log(storedValues);
-
-
+            
+            
+            
             /*
             for (let i = storedValues.length - 1; i <= 0; i--) {
                 if (typeof storedValues[storedValues.length - 1] == "string") {
@@ -74,16 +72,22 @@ button.forEach((btn) => {
                 }
             }
             */
-            equationToEval = storedValues.join('');
-            console.log(equationToEval);
-
-            solution = eval(equationToEval);
-            console.log(solution);
-            // return solution;
-            
+           equationToEval = storedValues.join('');
+           
+           solution = eval(equationToEval);
+           
+           numberConcatenator = [];
+           storedValues = [];
+           storedValues.push(solution);
+           // return solution;
+           
         }
         
         
+        console.log(numberConcatenator);
+        console.log(storedValues);
+        console.log(equationToEval);
+        console.log(solution);
        
         /*
         if (currentButton == "=") {
