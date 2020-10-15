@@ -26,8 +26,12 @@ button.forEach((btn) => {
             // This joins the numbers in numberConcatinator
             // Then changes them from strings to Numbers
             // Then sends them to storedValues array
-            joinedNumber = numberConcatenator.join('');
-            storedValues.push(Number(joinedNumber));
+
+            if (numberConcatenator[0] != "" && numberConcatenator[0] != undefined) {
+                joinedNumber = numberConcatenator.join('');
+                storedValues.push(Number(joinedNumber));
+            }
+
 
             // This switches the operation characters to ones recognzed by eval()
             if (currentButton == "−") {
@@ -54,14 +58,31 @@ button.forEach((btn) => {
         } else if (currentButton == "DEL") {
             storedValues.pop();
         } else if (currentButton == "AC") {
+            numberConcatenator = [];
             storedValues = [];
         } else if (currentButton == "=") {
 
+
+
+
+
+/*=============> THESE LINES ARE THE ISSUE CAUSING MULTIPLE EQUATIONS TO NOT WORK    <===============  **/
+
             
+
+
+            /* 
             joinedNumber = numberConcatenator.join('');
             storedValues.push(Number(joinedNumber));
+            */
             
+            if (numberConcatenator[0] != "" && numberConcatenator[0] != undefined) {
+                joinedNumber = numberConcatenator.join('');
+                storedValues.push(Number(joinedNumber));
+            }
             
+
+
             
             /*
             for (let i = storedValues.length - 1; i <= 0; i--) {
@@ -72,17 +93,25 @@ button.forEach((btn) => {
                 }
             }
             */
+
+
            equationToEval = storedValues.join('');
            
            solution = eval(equationToEval);
            
+
+
+           // THIS IS MAKING NUMBER CONCAT INTO A ZERO
            numberConcatenator = [];
+           
+           // return solution;
            storedValues = [];
            storedValues.push(solution);
-           // return solution;
-           
         }
         
+        
+        console.log(numberConcatenator[0]);
+
         
         console.log(numberConcatenator);
         console.log(storedValues);
