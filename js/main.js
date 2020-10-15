@@ -1,9 +1,12 @@
 let button = document.querySelectorAll(".btn");
+let display = document.getElementById("display");
 
-let currentButton = "";
+let currentButton;
 let numberConcatenator = [];
 let storedValues = [];
 let joinedNumber = "";
+
+
 
 // This regex detects all digits 0-9 and "."
 let digitAndPeriodRegex = /\d|\./;
@@ -14,7 +17,17 @@ let solution;
 button.forEach((btn) => {
     btn.addEventListener("click", function() {
         currentButton = btn.textContent;
-
+        textDisplayEditor();
+        /*
+        if (display.textContent[0] == 0 && display.textContent[1] != ".") {
+            display.textContent = "";
+            display.textContent += currentButton;
+        } else {
+            display.textContent += currentButton;
+        }
+        */
+        
+        
         if (digitAndPeriodRegex.test(currentButton)) {
             numberConcatenator.push(currentButton);
         }
@@ -30,6 +43,7 @@ button.forEach((btn) => {
             if (numberConcatenator[0] != "" && numberConcatenator[0] != undefined) {
                 joinedNumber = numberConcatenator.join('');
                 storedValues.push(Number(joinedNumber));
+               // display.textContent += storedValues;
             }
 
 
@@ -55,68 +69,56 @@ button.forEach((btn) => {
             console.log(storedValues);
             */
 
+
+
+
         } else if (currentButton == "DEL") {
-            storedValues.pop();
+            if (storedValues[storedValues.length - 1] == "-" || storedValues[storedValues.length - 1] == "*" || storedValues[storedValues.length - 1] == "/" || storedValues[storedValues.length - 1] == "+") {
+                storedValues.pop();
+            } else {
+                numberConcatenator.pop();
+                storedValues.pop();
+            }
+            /*
+            console.log(storedValues);
+            console.log(numberConcatenator);
+            */
         } else if (currentButton == "AC") {
             numberConcatenator = [];
             storedValues = [];
+            display.textContent = '0';
+            // console.log(display.textContent);
         } else if (currentButton == "=") {
-
-
-
-
-
-/*=============> THESE LINES ARE THE ISSUE CAUSING MULTIPLE EQUATIONS TO NOT WORK    <===============  **/
-
-            
-
-
-            /* 
-            joinedNumber = numberConcatenator.join('');
-            storedValues.push(Number(joinedNumber));
-            */
-            
             if (numberConcatenator[0] != "" && numberConcatenator[0] != undefined) {
                 joinedNumber = numberConcatenator.join('');
                 storedValues.push(Number(joinedNumber));
             }
-            
-
-
-            
-            /*
-            for (let i = storedValues.length - 1; i <= 0; i--) {
-                if (typeof storedValues[storedValues.length - 1] == "string") {
-                    storedValues.pop();
-                } else {
-                    continue;
-                }
-            }
-            */
 
 
            equationToEval = storedValues.join('');
            
            solution = eval(equationToEval);
            
-
-
-           // THIS IS MAKING NUMBER CONCAT INTO A ZERO
            numberConcatenator = [];
-           
-           // return solution;
            storedValues = [];
+
            storedValues.push(solution);
+           if (solution == undefined) {
+               display.textContent = "0";
+           } else {
+               display.textContent = solution;
+           }
         }
         
         
-        console.log(numberConcatenator[0]);
+        // console.log(numberConcatenator[0]);
 
         
-        console.log(numberConcatenator);
-        console.log(storedValues);
-        console.log(equationToEval);
-        console.log(solution);
+        // console.log(numberConcatenator);
+        // console.log(storedValues);
+        // console.log(equationToEval);
+        // console.log(solution);
+
        
         /*
         if (currentButton == "=") {
@@ -142,11 +144,57 @@ button.forEach((btn) => {
     });
 });
 
+let deleteString;
+let zeroVariable = "0";
+function textDisplayEditor () {
+    
+    if (currentButton == "DEL" && display.textContent.length != 1) {
+        deleteString = display.textContent.slice(0, -1);
+        display.textContent = deleteString;
+    } else if (currentButton == "DEL" && display.textContent.length == 1) {
+        display.textContent = "0";
+    } else if (display.textContent[0] == "0" && display.textContent[1] != ".") {
+        display.textContent = "";
+        display.textContent += currentButton;
+    } else {
+        display.textContent += currentButton;
+    }
+console.log(display.textContent);
 
+}
 
+/*
+(display.textContent[0] == "0" && display.textContent[1] != ".") {
+    display.textContent = "";
+    display.textContent += currentButton;
 
+    (currentButton == "DEL" && display.textContent.length == 1) {
+        display.textContent = zeroVariable;
 // =====> Trigger all this on currentButton == "="
 // Use a regular expression to catch all multiplication and division operants in testArray
 // Swap those for the version javascript will recognize & / 
 // Use the inbuilt eval() function to calculate answer
 // Return answer as textContent (or innerHTML) for the calculator display window.
+
+
+/*
+let deleteString;
+let zeroVariable = "0";
+function textDisplayEditor () {
+    if (display.textContent[0] == "0" && display.textContent[1] != ".") {
+        display.textContent = "";
+        display.textContent += currentButton;
+    } else if (currentButton == "DEL" && display.textContent.length != 1) {
+        deleteString = display.textContent.slice(0, -1);
+        display.textContent = deleteString;
+    } else if (currentButton == "DEL" && display.textContent.length == 1) {
+        display.textContent = zeroVariable;
+    } 
+    
+    else {
+        display.textContent += currentButton;
+    }
+console.log(display.textContent);
+
+}
+*/

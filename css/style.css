@@ -37,6 +37,7 @@ main div#calculator-display {
     margin: 10px auto;
     padding-left: 5px;
     padding-right: 5px;
+    overflow: hidden;
     
 }
 
