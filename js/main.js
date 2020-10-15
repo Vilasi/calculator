@@ -5,12 +5,14 @@ let currentButton;
 let numberConcatenator = [];
 let storedValues = [];
 let joinedNumber = "";
-
+let equalsChecker = false;
 
 
 // This regex detects all digits 0-9 and "."
 let digitAndPeriodRegex = /\d|\./;
 let equationToEval;
+let solutionToArray;
+let solutionToString;
 let solution;
 
 // This adds event listeners to all buttons - logging them when clicked.
@@ -32,7 +34,10 @@ button.forEach((btn) => {
             numberConcatenator.push(currentButton);
         }
 
-
+        /*
+        console.log(storedValues);
+        console.log(numberConcatenator);
+        */
 
         // 
         if (currentButton == "+" || currentButton == "−" || currentButton == "×" || currentButton == "÷") {
@@ -73,41 +78,51 @@ button.forEach((btn) => {
 
 
         } else if (currentButton == "DEL") {
-            if (storedValues[storedValues.length - 1] == "-" || storedValues[storedValues.length - 1] == "*" || storedValues[storedValues.length - 1] == "/" || storedValues[storedValues.length - 1] == "+") {
+            if (storedValues[storedValues.length - 1] == "-" && numberConcatenator.length == 0 || storedValues[storedValues.length - 1] == "*" && numberConcatenator.length == 0 || storedValues[storedValues.length - 1] == "/" && numberConcatenator.length == 0 || storedValues[storedValues.length - 1] == "+" && numberConcatenator.length == 0) {
                 storedValues.pop();
-            } else {
+            } else if (equalsChecker == true) {
+                solutionToString = solution.toString();
+                numberConcatenator = solutionToString.split("");
+                
                 numberConcatenator.pop();
+                solution = numberConcatenator.join("");
+
+
                 storedValues.pop();
+                
+
+
+
+
+
+
             }
-            /*
+            
+            
+            
+            else {
+                if (numberConcatenator.length > 0) {
+                    numberConcatenator.pop();
+                } else {
+                    storedValues.pop();
+                }
+                
+                // storedValues.pop();
+                
+            }
+            
             console.log(storedValues);
             console.log(numberConcatenator);
-            */
+            
         } else if (currentButton == "AC") {
             numberConcatenator = [];
             storedValues = [];
             display.textContent = '0';
+            equalsChecker = false;
             // console.log(display.textContent);
         } else if (currentButton == "=") {
-            if (numberConcatenator[0] != "" && numberConcatenator[0] != undefined) {
-                joinedNumber = numberConcatenator.join('');
-                storedValues.push(Number(joinedNumber));
-            }
-
-
-           equationToEval = storedValues.join('');
-           
-           solution = eval(equationToEval);
-           
-           numberConcatenator = [];
-           storedValues = [];
-
-           storedValues.push(solution);
-           if (solution == undefined) {
-               display.textContent = "0";
-           } else {
-               display.textContent = solution;
-           }
+            equalsKey();
+            equalsChecker = true;
         }
         
         
@@ -145,7 +160,6 @@ button.forEach((btn) => {
 });
 
 let deleteString;
-let zeroVariable = "0";
 function textDisplayEditor () {
     
     if (currentButton == "DEL" && display.textContent.length != 1) {
@@ -159,9 +173,36 @@ function textDisplayEditor () {
     } else {
         display.textContent += currentButton;
     }
-console.log(display.textContent);
-
 }
+
+
+
+
+
+
+function equalsKey () {
+    if (numberConcatenator[0] != "" && numberConcatenator[0] != undefined) {
+        joinedNumber = numberConcatenator.join('');
+        storedValues.push(Number(joinedNumber));
+    }
+
+
+   equationToEval = storedValues.join('');
+   
+   solution = eval(equationToEval);
+   
+   numberConcatenator = [];
+   storedValues = [];
+
+   storedValues.push(solution);
+   //numberConcatenator.push(solution);
+   if (solution == undefined) {
+       display.textContent = "0";
+   } else {
+       display.textContent = solution;
+   }
+}
+
 
 /*
 (display.textContent[0] == "0" && display.textContent[1] != ".") {
