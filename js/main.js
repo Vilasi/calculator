@@ -1,9 +1,10 @@
-const button = document.querySelectorAll(".btn");
-const display = document.getElementById("display");
+const BUTTON = document.querySelectorAll(".btn");
+let display = document.getElementById("display");
 
 let currentButton;
 let numberConcatenator = [];
 let storedValues = [];
+// let solutionToArray = [];
 let joinedNumber = "";
 let equalsChecker = false;
 let equationToEval;
@@ -15,18 +16,16 @@ let digitAndPeriodRegex = /\d|\./;
 let operationSyntaxErrorRegex = /(\*\+)|(\*\-\-)|(\*\/)|(\*\*)|(\/\+)|(\/\-\-)|(\/\/)|(\/\*)|(\+\+)|(\+\-\-)|(\+\/)|(\+\*)|(\-\+)|(\-\-\-)|(\-\/)|(\-\*)/g;
 
 // This adds event listeners to all buttons - logging them when clicked.
-button.forEach((btn) => {
+BUTTON.forEach((btn) => {
     btn.addEventListener("click", function() {
         currentButton = btn.textContent;
         textDisplayEditor();
         if (digitAndPeriodRegex.test(currentButton)) {
             numberConcatenator.push(currentButton);
-        }
+        };
         actionButtons();
     });
 });
-
-
 
 function actionButtons() {
     if (currentButton == "+" || currentButton == "−" || currentButton == "×" || currentButton == "÷") {
@@ -83,15 +82,8 @@ function actionButtons() {
     };
 };
 
-
-
-
-
-
-
 let deleteString;
 function textDisplayEditor() {
-    
     if (currentButton == "DEL" && display.textContent.length != 1) {
         deleteString = display.textContent.slice(0, -1);
         display.textContent = deleteString;
@@ -104,8 +96,6 @@ function textDisplayEditor() {
         display.textContent += currentButton;
     };
 };
-
-
 
 let roundedSolution;
 function equalsKey() {
@@ -123,15 +113,15 @@ function equalsKey() {
        return;
    }
    solution = eval(equationToEval);
-   roundedSolution = solution.toFixed(5);
+   roundedSolution = Math.round(1000*solution)/1000;
    numberConcatenator = [];
    storedValues = [];
    storedValues.push(solution);
-   //numberConcatenator.push(solution);
+
    if (solution == undefined) {
        display.textContent = "0";
    } else {
-       display.textContent = solution;
+       display.textContent = roundedSolution;
    };
 };
 
